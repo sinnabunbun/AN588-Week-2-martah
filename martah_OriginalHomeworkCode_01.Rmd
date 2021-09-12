@@ -2,10 +2,58 @@
 title: "martah_OriginalHomeworkCode_01"
 author: "Marta"
 date: "9/12/2021"
-output: html_document
+output: 
+  html_document:
+  toc: true
+  toc_float: true
+  theme: cosmo
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-this is to start a save
+
+- For starters I am entirely unsure what this first chunk does to he R markdown document?? If you guys could help explain it would be greatly appreciated 
+
+# Module 4  
+
+## Challenge 1  
+
+``` {r}
+v1<- c("Stately, ", "plump ", "Buck ", "Mulligan ", "came ", "from ", "the ", "stairhead, ", "bearing ", "a ", "bowl ", "of ", "lather ", "on ", "which ", "a ", "mirror ", "and ", "a ", "razor ", "lay ", "crossed.")  
+v1
+v1[seq(from = 1, to = 22, by = 3)]
+```
+- sooooo I incorrectly ran stringr so that's why the code is typed out like that, I think in stringr it would actually be...
+``` {r}
+library(stringr)
+v1<- c("Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.")
+str_split(v1, boundary("word"))
+```
+- I'm still unsure if that is the best way to do it??? I'm also unsure how to the sequence this
+
+## Challenge 2  
+
+``` {r}
+#setup
+m <- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
+m
+```
+``` {r}
+x<-c(m[, 2], m[, 3], m[,6])
+x
+  #gives the elements from columns 2, 3, and 6
+  #__unsure if this is suppose to be segmented?__
+```
+```{r}
+x<-c(m[6,], m[8,])   
+x
+  #assigns variable x the elements from rows 6 and 8
+```
+```{r}
+x<-c(m[2, 2]:m[6, 9])  
+x
+  #assigns the elements from (row 2, column 2) to (row 6, column 9) to the variable x
+```
+
+## Challenge 3
+
