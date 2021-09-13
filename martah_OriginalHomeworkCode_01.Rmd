@@ -18,13 +18,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Challenge 1  
 
-``` {r}
+``` {r charvector}
 v1<- c("Stately, ", "plump ", "Buck ", "Mulligan ", "came ", "from ", "the ", "stairhead, ", "bearing ", "a ", "bowl ", "of ", "lather ", "on ", "which ", "a ", "mirror ", "and ", "a ", "razor ", "lay ", "crossed.")  
 v1
 v1[seq(from = 1, to = 22, by = 3)]
 ```
-- sooooo I incorrectly ran stringr so that's why the code is typed out like that, I think in stringr it would actually be...
-``` {r}
+- sooooo I incorrectly ran stringr- that's why the code is typed out like that, and so I think in stringr it would actually be...
+``` {r stringr}
 library(stringr)
 v1<- c("Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.")
 str_split(v1, boundary("word"))
@@ -33,7 +33,7 @@ str_split(v1, boundary("word"))
 
 ## Challenge 2  
 
-``` {r}
+``` {r setup2}
 #setup
 m <- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
 m
@@ -42,7 +42,7 @@ m
 x<-c(m[, 2], m[, 3], m[,6])
 x
   #gives the elements from columns 2, 3, and 6
-  #__unsure if this is suppose to be segmented?__
+  #unsure if this is suppose to be segmented?
 ```
 ```{r}
 x<-c(m[6,], m[8,])   
