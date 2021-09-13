@@ -12,7 +12,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-- For starters I am entirely unsure what this first chunk does to he R markdown document?? If you guys could help explain it would be greatly appreciated 
+- For starters I am entirely unsure what this first chunk does to the R markdown document?? If you guys could help explain it would be greatly appreciated 
 
 # Module 4  
 
@@ -38,18 +38,18 @@ str_split(v1, boundary("word"))
 m <- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
 m
 ```
-``` {r}
+``` {r columnelements}
 x<-c(m[, 2], m[, 3], m[,6])
 x
   #gives the elements from columns 2, 3, and 6
   #unsure if this is suppose to be segmented?
 ```
-```{r}
+```{r xassign}
 x<-c(m[6,], m[8,])   
 x
   #assigns variable x the elements from rows 6 and 8
 ```
-```{r}
+```{r xassign2}
 x<-c(m[2, 2]:m[6, 9])  
 x
   #assigns the elements from (row 2, column 2) to (row 6, column 9) to the variable x
@@ -57,3 +57,49 @@ x
 
 ## Challenge 3
 
+```{r matrixsetup}
+a<-array(c(400:1), dim = c(5, 5, 4, 4))  
+a
+
+a[1, 1, 1, 2]  
+
+a[2, 3, 2, ]
+
+a[1:5, 1:5, 3, 3]  
+```
+
+## Challenge 4
+
+```{r taxonomy}
+Lemuroidea <- c("Cheirogaleidae", "Lepilemuridae", "Indriidae", "Lemuridae",
+    "Daubentoniidae")
+Lorisoidea <- c("Lorisidae", "Galagidae")
+Strepsirhini <- list(Lemuroidea, Lorisoidea)
+names(Strepsirhini) <- list("Lemuroidea", "Lorisoidea")
+Strepsirhini
+  Tarsioidea<- c("Tarsiidae")
+  Catarrhini<- c("Cercopithecidae", "Hylobatidae", "Hominidae")
+  Platyrrhini<- c("Cebidae", "Atelidae", "Pitheciidae")
+  Anthropoidea<- list(Catarrhini, Platyrrhini)
+    names(Anthropoidea)<- list("Catarrhini", "Platyrrhini")
+  Haplorhini<- list(Anthropoidea, Tarsioidea)
+    names(Haplorhini)<- list("Anthropoidea", "Tarsioidea")
+Haplorhini
+  Primates<- list(Haplorhini, Strepsirhini)
+    names(Primates)<- list("Haplorhini", "Strepsirhini")
+Primates
+```
+
+## Challenge 5
+
+``` {r lastmatrix}
+m3<-matrix(c(3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2), ncol=5, nrow=3, byrow=TRUE)
+m3
+
+df<-data.frame(m3)
+df
+
+df[, c(2)]<-as.logical(df[, c(2)]) #idk why the values equal true or false?
+df[, c(3)]<-as.factor(df[, c(3)])
+str(df)
+```
