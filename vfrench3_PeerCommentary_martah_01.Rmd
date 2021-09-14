@@ -1,0 +1,159 @@
+---
+title: "vfrench3_PeerCommentary_martah_01"
+author: "Victoria French"
+date: "9/14/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+- For starters I am entirely unsure what this first chunk does to the R markdown document?? If you guys could help explain it would be greatly appreciated 
+
+V- So this R chunk {r} is named {setup} and its code and its output will not be printed in the final html {include=FALSE}. The opts_chunk$set() function sets up your global options so that all the chunks after this use the default settings you put in place. Here you are setting that echo=TRUE so all chunks will print the code as well as the resulting output in the final html. 
+
+# Module 4  
+
+## Challenge 1  
+
+``` {r charvector}
+v1<- c("Stately, ", "plump ", "Buck ", "Mulligan ", "came ", "from ", "the ", "stairhead, ", "bearing ", "a ", "bowl ", "of ", "lather ", "on ", "which ", "a ", "mirror ", "and ", "a ", "razor ", "lay ", "crossed.")  
+v1
+v1[seq(from = 1, to = 22, by = 3)]
+
+#sequencing a list (meaning you didn't modify the str_split function)
+v1[[1]][seq(from = 1, to = 22, by = 3)]
+```
+- sooooo I incorrectly ran stringr- that's why the code is typed out like that, and so I think in stringr it would actually be...
+``` {r stringr}
+library(stringr)
+v1<- c("Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.")
+str_split(v1, boundary("word")) 
+
+#v1 <- str_split(v1, boundary("word")) 
+
+#v1 <- str_split(v1, boundary("word"), simplify=TRUE) 
+```
+- I'm still unsure if that is the best way to do it??? I'm also unsure how to the sequence this
+
+V- So the boundary argument defintely works fine. I set the pattern to ' '(space) when I was coding it which is another way but I think this worked better because it got rid of the extra characters like the comma and period. The only thing is when using the str_split function if you look at the documentation it tells you that one of the default arguments is 'simplify=FALSE' meaning it returns the string of characters as a single list item and not 22 individual character vectors. This means when you are sequencing it later you can't pull out specific characters unless you subset the list first (I put the code for doing this where you originally sequenced). Changing the argument simplify to equal TRUE is easier and then allows you to run the seq() function the way you originally did. 
+
+Also when you are applying the str_split function you should assign it to a variable to save it for when you are sequencing later (like I did in the hashed line of code). 
+
+Minor note: I think the seq() function is inclusive (meaning it will pull the 1st element) so I think if you actually want every third word you should start at the 0 element instead 1. 
+
+## Challenge 2  
+
+``` {r setup2} 
+#setup
+m <- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
+m
+```
+
+``` {r columnelements}
+x<-c(m[, 2], m[, 3], m[,6])
+x
+  #gives the elements from columns 2, 3, and 6
+  #unsure if this is suppose to be segmented?
+```
+
+V- So by segmented I'm assuming you mean subsetting the matrix 3 separate times? There are a few reasons why I wouldn't do this. The first is that its usually easier to condense your code but the second and most important is that if you code it this way you are creating a vector instead of just extracting the elements of the matrix (meaning the object you are creating is now just a list of numbers and has lost the shape of a matrix). 
+
+This is how I did it. You can see that I am subsetting the whole matrix and then using a vector within the subset brackets to specify which columns I want! 
+
+x <- m[,c(2,3,6)] 
+   
+```{r xassign}
+x<-c(m[6,], m[8,])   
+x
+  #assigns variable x the elements from rows 6 and 8
+```
+
+V- so again you are creating a vector instead of a matrix. Also this is actually only extracting row 6 and 8 (not 7 in between). Again it would be easier to just create a sequence or vector at the row identifier instead of creating a vector of separate subsets. 
+
+So you could do something similar to the previous example 
+x<- m[c(6,7,8),] 
+
+OR you could use a colon operator to create a sequence instead of a vector 
+x<- m[6:8, ]
+
+```{r xassign2}
+x<-c(m[2, 2]:m[6, 9])  
+x
+  #assigns the elements from (row 2, column 2) to (row 6, column 9) to the variable x
+```
+
+V- x<-m[2:6,2:9] 
+
+## Challenge 3
+
+```{r arraysetup}
+a<-array(c(400:1), dim = c(5, 5, 4, 4))  #I would add some commentary here
+a
+
+a[1, 1, 1, 2]  
+
+a[2, 3, 2, ]
+
+a[1:5, 1:5, 3, 3]  
+```
+
+## Challenge 4
+
+```{r taxonomy}
+Lemuroidea <- c("Cheirogaleidae", "Lepilemuridae", "Indriidae", "Lemuridae",
+    "Daubentoniidae")
+Lorisoidea <- c("Lorisidae", "Galagidae")
+Strepsirhini <- list(Lemuroidea, Lorisoidea)
+names(Strepsirhini) <- list("Lemuroidea", "Lorisoidea")
+Strepsirhini
+  Tarsioidea<- c("Tarsiidae")
+  Catarrhini<- c("Cercopithecidae", "Hylobatidae", "Hominidae")
+  Platyrrhini<- c("Cebidae", "Atelidae", "Pitheciidae")
+  Anthropoidea<- list(Catarrhini, Platyrrhini)
+    names(Anthropoidea)<- list("Catarrhini", "Platyrrhini")
+  Haplorhini<- list(Anthropoidea, Tarsioidea)
+    names(Haplorhini)<- list("Anthropoidea", "Tarsioidea")
+Haplorhini
+  Primates<- list(Haplorhini, Strepsirhini)
+    names(Primates)<- list("Haplorhini", "Strepsirhini")
+Primates
+```
+
+V- Again this is a huge chunk of code without any annotation and lists can sometimes be confusing so I would go through and step by step explain why you are putting in each line of code if you want it to be a useful reference tool. 
+
+Also here is a little bit of code I included at the end to include the primate classification in the final output because right now all you have is a list object named primates but the Primate level of classification is nowhere in the output (hopefully that makes sense sorry)
+
+taxonomy<- list(primates)
+taxonomy
+
+## Challenge 5
+
+``` {r lastmatrix}
+m3<-matrix(c(3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2), ncol=5, nrow=3, byrow=TRUE)
+m3
+
+#so here when people are refering to matrices, the 5x3 dimensions always indicate the row first (like when you are subsetting the row argument is always first). It also helps to look at the order of arguments in the matrix documentation (the nrow is listed first) so you created a matrix with 5 columns and 3 rows here instead of 5 rows and 3 columns
+
+#m3<-matrix(c(3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2), 5,3, byrow=TRUE)
+
+
+
+df<-data.frame(m3)
+df
+
+df[, c(2)]<-as.logical(df[, c(2)]) #idk why the values equal true or false?
+df
+df[, c(3)]<-as.factor(df[, c(3)]) #just to simplify the code and your life you don't need to make a vector if its a single numeric value. 
+#df[,3] would also work 
+df #I would get in the habit of just printing the objects you are creating to double check yourself. It really helps me visualize things! 
+str(df)
+```
+V- The values are TRUE and FALSE because that is what logical values are in R. you are essentially changing the data type from numeric (1 or 2) to values of logic (True or False)
+
+## Overall Notes: 
+- I liked your comments where you had questions but you were missing some general comments (Comments that will help you when you look back at the code like desired outputs of code, function descriptions, etc.)
+- You definitely have a good handle on the setup of the markdown document! Good Job!
+- Just be careful on small details/syntax because they can change the entire output of what you're doing. Like in Challenge 5 switching the rows and columns changes the output of all of the subsets and assigns logical and factor values to data that shouldn't be factored. Also for the first challenge misplacing the subsets created a vector instead of a matrix output. I wrote it already but printing the objects in the code after you assign them helps you visualize the data and helps you double check yourself for those types of mistakes. 
+- I would add a section with your biggest challenges for the final assignment! 
