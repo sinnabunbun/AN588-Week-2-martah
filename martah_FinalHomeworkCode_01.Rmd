@@ -1,0 +1,127 @@
+---
+title: "martah_FinalHomeworkCode_01"
+author: "Marta"
+date: "9/19/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(stringr)
+```
+
+# Module 4  
+
+## Challenge 1  
+
+``` {r charvector}
+v1<- c("Stately, ", "plump ", "Buck ", "Mulligan ", "came ", "from ", "the ", "stairhead, ", "bearing ", "a ", "bowl ", "of ", "lather ", "on ", "which ", "a ", "mirror ", "and ", "a ", "razor ", "lay ", "crossed.")#individually writing out "" for each word in the vector
+v1
+v1[seq(from = 0, to = 22, by = 3)] #originally sequenced from 1:22 which returned different elements than 0:22
+```
+__Or alternatively Victoria helped me modify my stringr code__
+```{r stringr}
+v1<- c("Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.")
+v1<-str_split(v1, boundary("word"), simplify = TRUE)#was originally missing `simplify = true` which returned a vector length of one and I was unable to sequence. Now I can split the vector into elements defined by the boundary "word" and sequence them.
+v1
+v1[seq(from = 0, to = 22, by = 3)]
+```
+
+## Challenge 2  
+
+``` {r setup2} 
+#setup matrix
+m <- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
+m
+```
+
+``` {r columnelements}
+x<- m[,c(2,3,6)] 
+x #assigning x the columns 2, 3, and 6
+```
+__Originally I was doing `x<-c(m[, 2], m[, 3], m[,6])` which returned a string of integers instead of subsetting the columns. Again, major help from Victoria in correcting my subsetting methods!__
+```{r xassign}
+x<- m[6:8, ]   
+x #assigns variable x the elements from rows 6 to 8 (originally was using just 6 and 8)
+```
+
+```{r xassign2}
+x<-m[2, 2]:m[6, 9]  
+x#assigns the elements from (row 2, column 2) to (row 6, column 9) to the variable x
+```
+__You lose the structure of the columns in the last chunk but since we are extracting the elements and not the cols and rows themselves I thought it would be ok.__
+
+## Challenge 3
+
+```{r arraysetup}
+a<-array(c(400:1), dim = c(5, 5, 4, 4))  #setting up an array of 400:1 (descending) with the dimensions (5, 5) for rows and columns and (4, 4) for the 3rd and fourth dimension
+a
+a[1, 1, 1, 2]
+#[1] 300
+a[2, 3, 2, ]
+#[1] 364 264 164 64
+a[1:5, 1:5, 3, 3] 
+#returns [1:5, 1:5] from table (3,)
+```
+
+## Challenge 4
+
+```{r taxonomy}
+Lemuroidea <- c("Cheirogaleidae", "Lepilemuridae", "Indriidae", "Lemuridae",
+    "Daubentoniidae")
+Lorisoidea <- c("Lorisidae", "Galagidae")
+#adding the genus names to each family using `c()`
+
+Strepsirhini <- list(Lemuroidea, Lorisoidea)
+  names(Strepsirhini) <- list("Lemuroidea", "Lorisoidea")
+#naming Strepsirhini the list and naming each list element their family name
+
+Strepsirhini
+
+Tarsioidea<- c("Tarsiidae")
+Catarrhini<- c("Cercopithecidae", "Hylobatidae", "Hominidae")
+Platyrrhini<- c("Cebidae", "Atelidae", "Pitheciidae")
+#adding the genus names to each family using `c()`
+
+Anthropoidea<- list(Catarrhini, Platyrrhini)
+  names(Anthropoidea)<- list("Catarrhini", "Platyrrhini")
+Haplorhini<- list(Anthropoidea, Tarsioidea)
+  names(Haplorhini)<- list("Anthropoidea", "Tarsioidea")
+#naming the two lists and naming each list element their family name
+  
+Haplorhini
+
+Primates<- list(Haplorhini, Strepsirhini)
+  names(Primates)<- list("Haplorhini", "Strepsirhini")
+Primates
+#Victoria also added in the primates as part of the taxonomy which I liked so I included that code in the final
+Taxonomy<- list(Primates)
+Taxonomy
+```
+
+## Challenge 5
+
+``` {r lastmatrix}
+m3<-matrix(c(3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2), nrow=5, ncol=3, byrow=TRUE) #originally I had flipped the rows and column so this data set is corrected
+m3
+
+df<-data.frame(m3)
+df #coercing m3 into a data frame named df
+
+df[, 2]<-as.logical(df[, 2])
+df[, 2] #coercing col 2 elements into logical objects 
+
+df[, 3]<-as.factor(df[, 3])
+df[, 3] #coercing col 3 elements into factors
+
+str(df) #boom
+```
+
+
+## Challenges
+
+1) My first challenge would most definitely be understanding the commenting portion of code. I had omitted this section in my rough draft homework as well as omitting notation on my code both inside and outside of the chunks. My peers were super helpful and pointed out things even if I had neglecting pointing them out myself by either noting or including my challenges.
+2) I still am struggling with conceptual topics, which were some of my original comments. That is more of a reading/learning problem so I have a better understanding conceptually of things like why certain integers will return TRUE/FALSE and when to use the combine function and such.
+3) I had a hard time understanding the stringr functions in terms of how o separate the elements so I could use them in sequencing. After Victoria helped with the simplify command I was all set
+4) I have to pay more attention to coding syntax, I was confused on when to extract whole columns and when to extract elements in challenge two. Also was confused with the (row, column) syntax in challenge 5.
+5) I need to do more returns in my work to double check because some of the mistakes weren't apparent until I began checking the returns.
