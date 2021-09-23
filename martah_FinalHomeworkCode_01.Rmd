@@ -96,6 +96,7 @@ Primates<- list(Haplorhini, Strepsirhini)
 Primates
 #Victoria also added in the primates as part of the taxonomy which I liked so I included that code in the final
 Taxonomy<- list(Primates)
+  names(Taxonomy)<- list("Primates")
 Taxonomy
 ```
 
